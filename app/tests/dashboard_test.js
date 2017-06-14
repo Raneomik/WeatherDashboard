@@ -2,7 +2,7 @@
 
 describe('weatherApp.dashboard module', function() {
 
-  beforeEach(module('weatherApp.homepage'));
+  beforeEach(module('weatherApp.dashboard'));
 
   describe('dashboard controller', function(){
 

@@ -8,7 +8,16 @@ angular.module('weatherApp', [
   'weatherApp.version'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-  $locationProvider.hashPrefix('!');
+  $locationProvider.hashPrefix('');
 
-  $routeProvider.otherwise({redirectTo: '/dashboard'});
+  $routeProvider
+    .when('/dashboard', {
+    templateUrl: 'views/dashboard.html',
+    controller: 'DashboardCtrl'
+  })
+    .when('/settings', {
+      templateUrl: 'views/settings.html',
+      controller: 'SettingsCtrl'
+    })
+    .otherwise({redirectTo: '/dashboard'});
 }]);

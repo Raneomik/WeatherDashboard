@@ -5,4 +5,4 @@ angular.module('weatherApp.version', [
   'weatherApp.version.version-directive'
 ])
 
-.value('version', '5');
+.value('version', '0.0.1');
