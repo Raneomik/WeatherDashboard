@@ -8,7 +8,7 @@ describe('weatherApp.dashboard module', function() {
 
     it('should ....', inject(function($controller) {
       //spec body
-      var DashboardCtrl = $controller('DashboardCtrl');
+      var DashboardCtrl = $controller('dashboardCtrl');
       expect(DashboardCtrl).toBeDefined();
     }));
 

@@ -3,21 +3,25 @@
 // Declare app level module which depends on views, and components
 angular.module('weatherApp', [
   'ngRoute',
+  'weatherApp.routeCheck',
   'weatherApp.dashboard',
   'weatherApp.settings',
-  'weatherApp.version'
-]).
-config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-  $locationProvider.hashPrefix('');
+  'weatherApp.version',
+  'weatherApp.widgetList',
+  'weatherApp.temperature'
+])
+  .config(['$routeProvider', function($routeProvider) {
+    $routeProvider
+      .when('/dashboard', {
+        templateUrl: 'views/dashboard.html',
+        controller: 'dashboardCtrl'
+      })
+      .when('/settings', {
+        templateUrl: 'views/settings.html',
+        controller: 'settingsCtrl'
+      })
+      .otherwise({redirectTo: '/dashboard'});
 
-  $routeProvider
-    .when('/dashboard', {
-    templateUrl: 'views/dashboard.html',
-    controller: 'DashboardCtrl'
-  })
-    .when('/settings', {
-      templateUrl: 'views/settings.html',
-      controller: 'SettingsCtrl'
-    })
-    .otherwise({redirectTo: '/dashboard'});
-}]);
+  }])
+  .value('widgets', [])
+  .value('appid', '5d61d8cdd94e863ffd486496b4b0075a');

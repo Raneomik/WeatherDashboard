@@ -1,0 +1,30 @@
+<div ng-controller="widgetCtrl">
+
+    <div ng-show="widgets.length=='0'" class="row">
+        <div class="alert alert-info" role="alert">There's no widget. Add one in "Settings" tab</div>
+    </div>
+    <div ng-show="fail.length" class="row">
+        <div class="alert alert-warning" role="alert">{{ fail.message }}</div>
+    </div>
+
+    <article ng-show="widgets.length">
+        <div id="weather-widget-list">
+            <div ng-repeat="widget in widgets" class="col-sm-4">
+                <div class="view weather-widget">
+                    <button ng-controller="routeCtrl" class="btn btn-primary update-button pull-left"
+                            ng-click="updateWidget(widget)">
+                        <span class="glyphicon glyphicon-refresh"></span>
+                    </button>
+                    <button ng-controller="routeCtrl" class="btn btn-danger remove-button pull-right"
+                            ng-class="{hidden:isActive('/dashboard')}" ng-click="removeWeatherWidget(widget)">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                    <label class="city-name">{{widget.name}}</label> ({{widget.country | lowercase}})
+                    <span class="wi wi-fw wi-owm-{{widget.iconId}} weather-icon pull-right"></span>
+                    <p>Temperature : <label>{{widget.temp | tempKtoC}} °C</label>
+                </div>
+            </div>
+
+        </div>
+    </article>
+</div>

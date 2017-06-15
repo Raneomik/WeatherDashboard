@@ -1,25 +1,82 @@
 /* app css stylesheet */
-
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+.app-navbar {
+    background-color: rgba(235,235,255,0.3);
 }
 
-.menu:before {
-  content: "[";
+.app-navbar a {
+    font-size : 16px;
+    color: #555;
 }
 
-.menu:after {
-  content: "]";
+.app-navbar a > span {
+    margin : 5px
 }
 
-.menu > li {
-  display: inline;
+.app-navbar .navbar-brand {
+    font-size: 20px;
 }
 
-.menu > li + li:before {
-  content: "|";
-  padding-right: 0.3em;
+.app-navbar .navbar-brand:hover {
+    color: #111;
+}
+
+.v-spacing {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.search-form {
+    margin: auto;
+}
+
+.weather-widget {
+    border: solid 1px #ccc;
+    border-radius: 5%;
+    margin: 10px 0;
+    padding: 25px;
+    background-color: rgba(200,200,255,0.3);
+}
+
+.weather-widget:hover {
+    background-color: rgba(235,235,255,0.2);
+}
+
+.remove-button,
+.update-button {
+    border-radius: 50%;
+    position: relative;
+}
+
+.remove-button {
+    margin: -35px -35px 0 0;
+}
+
+.update-button {
+    margin: -35px 0 0 -35px;
+}
+
+.update-button > span
+.remove-button > span {
+    font-size: 20px;
+}
+
+.weather-icon {
+    font-size: 45px
+}
+
+.temp-icon {
+    margin: 0;
+    font-size: 25px;
+}
+
+.city-name {
+    font-size: 20px;
+}
+
+.dropdown-menu {
+    cursor: pointer;
+}
+
+.dropdown-menu > li:hover {
+    background-color: #eee;
 }

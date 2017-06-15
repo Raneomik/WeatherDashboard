@@ -1,5 +1,34 @@
-<p>This is the partial for the settings page</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+<div class="container text-center">
+    <form ng-controller="widgetCtrl" ng-submit="addWeatherWidget(searchData)" class="form-inline v-spacing"
+          role="form">
+        <div class="input-group search-form">
+            <p class="large">Add a widget: </p>
+
+            <div class="form-group">
+                <div class="dropdown" id="add-widget-info" data-toggle="tooltip" data-placement="top" title="Add a widget entering a City ID or it's Name">
+                    <div id="collectiondropDown" class="btn btn-default dropdown-toggle" id="dLabel" role="button"
+                         data-toggle="dropdown"
+                         aria-haspopup="true" aria-expanded="true">
+                        <span>{{ selectedItem }}</span>
+                        <b class="caret"></b>
+                    </div>
+
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <li class="text-center" ng-click="selectSearchType('City ID' , 'city-id')">City ID</li>
+                        <li class="text-center" ng-click="selectSearchType('City Name', 'city-name')">City Name</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="new-weather-widget" placeholder="{{ selectedItem }}"
+                       ng-model="weatherSearch" type="text"/>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default" type="button"><span
+                        class="glyphicon glyphicon-plus"></span>
+                </button>
+            </div>
+        </div>
+    </form>
+    <ng-include src="'views/widget_list.html'"></ng-include>
+</div>

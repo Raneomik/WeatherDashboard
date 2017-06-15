@@ -1,8 +1,6 @@
 'use strict';
 
-angular.module('weatherApp.dashboard', ['ngRoute'])
+angular.module('weatherApp.dashboard', [])
+  .controller('dashboardCtrl', ['$scope',  function($scope) {
 
-
-.controller('DashboardCtrl', [function() {
-
-}]);
+  }]);
