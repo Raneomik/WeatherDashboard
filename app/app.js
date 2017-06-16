@@ -7,7 +7,7 @@ angular.module('weatherApp', [
   'weatherApp.dashboard',
   'weatherApp.settings',
   'weatherApp.version',
-  'weatherApp.widgetList',
+  'weatherApp.widgetManager',
   'weatherApp.temperature'
 ])
   .config(['$routeProvider', function($routeProvider) {
@@ -21,7 +21,4 @@ angular.module('weatherApp', [
         controller: 'settingsCtrl'
       })
       .otherwise({redirectTo: '/dashboard'});
-
   }])
-  .value('widgets', [])
-  .value('appid', '5d61d8cdd94e863ffd486496b4b0075a');

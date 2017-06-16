@@ -4,7 +4,8 @@
  * Settings module, for settings controller got at '/settings' route
  */
 angular.module('weatherApp.settings', [])
-  .controller('settingsCtrl',['$scope', function($scope){
+
+  .controller('settingsCtrl',function($scope){
     $scope.selectedItem = "City Name";
     $scope.searchData = 'city-name';
 
@@ -13,4 +14,4 @@ angular.module('weatherApp.settings', [])
       $scope.searchData = slug;
     };
 
-  }]);
+  });

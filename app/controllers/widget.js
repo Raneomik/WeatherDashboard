@@ -3,11 +3,12 @@
 /**
  * Widget management module
  */
-angular.module('weatherApp.widgetList', [])
-  .controller('widgetCtrl', ['$scope', '$rootScope', '$http', 'widgets', 'appid',
-    function($scope, $rootScope, $http, widgets, appid) {
+angular.module('weatherApp.widgetManager', ['weatherApp.service'])
 
-    $rootScope.error = false;
+  .value('widgets', [])
+
+  .controller('widgetCtrl', function($scope, $rootScope, apiQueryService, widgets) {
+
     /**
      * Add a Widget
      * @param searchType
@@ -16,34 +17,37 @@ angular.module('weatherApp.widgetList', [])
 
       if(!$scope.weatherSearch){
         $rootScope.error = {
-          triggered: true,
           message: 'no data provided'
         };
         console.log($scope.error);
         return;
       }
 
-      var apiRequest = '';
+      var apiRequest;
 
       if('city-id' === searchType){
-        apiRequest = `http://api.openweathermap.org/data/2.5/weather?id=${$scope.weatherSearch}&appid=${appid}`;
+        apiRequest = apiQueryService.byId($scope.weatherSearch);
       } else if('city-name' === searchType){
-        apiRequest = `http://api.openweathermap.org/data/2.5/weather?q=${$scope.weatherSearch}&appid=${appid}`;
+        apiRequest = apiQueryService.byName($scope.weatherSearch);
+      } else{
+        $rootScope.error = {
+          message: 'unknown search type'
+        };
+        return;
       }
-      $http.get(apiRequest)
-        .success(function(response) {
-          widgets.push({
-            name: response.name,
-            cityId: response.id,
-            country: response.sys.country,
-            iconId: response.weather[0].id,
-            temp: response.main.temp
-          });
-          $rootScope.error = false;
-        })
+
+      apiRequest.success(function(response) {
+        widgets.push({
+          name: response.name,
+          cityId: response.id,
+          country: response.sys.country,
+          iconId: response.weather[0].id,
+          temp: response.main.temp
+        });
+        $rootScope.error = false;
+      })
         .error(function(error) {
           $rootScope.error = error;
-          $rootScope.error.triggered = true;
           console.log($scope.error);
         });
 
@@ -63,7 +67,7 @@ angular.module('weatherApp.widgetList', [])
      * @param widget
      */
     $scope.updateWidget = function(widget) {
-      $http.get(`http://api.openweathermap.org/data/2.5/weather?id=${widget.cityId}&appid=${appid}`)
+      apiQueryService.byId(widget.cityId)
         .success(function(response) {
           widget.iconId = response.weather[0].id;
           widget.temp = response.main.temp;
@@ -71,7 +75,6 @@ angular.module('weatherApp.widgetList', [])
         })
         .error(function(error) {
           $rootScope.error = error;
-          $rootScope.error.triggered = true;
           console.log($scope.error);
         });
 
@@ -82,4 +85,4 @@ angular.module('weatherApp.widgetList', [])
      * @type {*}
      */
     $scope.widgets = widgets;
-  }]);
+  });

@@ -7,10 +7,10 @@ describe('weatherApp.settings module', function() {
 
   beforeEach(module('weatherApp.settings'));
 
-  describe('settings controller', function(){
+  describe('settings controller', function() {
 
     // Initialize the controller and a mock scope
-    beforeEach(inject(function ($rootScope, $controller) {
+    beforeEach(inject(function($rootScope, $controller) {
       scope = $rootScope.$new();
       settingsCtrl = $controller('settingsCtrl', {
         $scope: scope
