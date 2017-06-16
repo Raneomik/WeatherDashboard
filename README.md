@@ -1,6 +1,6 @@
 # Weather miniApp - small weather widget manager 
 
-Mini AngularJS application. It interrogates the [OpenWeatherMap](https://openweathermap.org) API to get City current weather and teperature.
+Mini AngularJS application. It interrogates the [OpenWeatherMap](https://openweathermap.org) API to get a City's current weather and temperature.
 
 ### Prerequisites
 
