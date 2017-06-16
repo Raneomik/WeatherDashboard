@@ -55,7 +55,8 @@
     margin: -35px 0 0 -35px;
 }
 
-.update-button > span
+.city-name,
+.update-button > span,
 .remove-button > span {
     font-size: 20px;
 }
@@ -67,10 +68,6 @@
 .temp-icon {
     margin: 0;
     font-size: 25px;
-}
-
-.city-name {
-    font-size: 20px;
 }
 
 .dropdown-menu {

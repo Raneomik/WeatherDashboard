@@ -4,13 +4,23 @@ describe('weatherApp.dashboard module', function() {
 
   beforeEach(module('weatherApp.dashboard'));
 
+
   describe('dashboard controller', function(){
 
-    it('should ....', inject(function($controller) {
-      //spec body
-      var DashboardCtrl = $controller('dashboardCtrl');
-      expect(DashboardCtrl).toBeDefined();
+    var dashboardCtrl,
+      scope;
+
+    // Initialize the controller and a mock scope
+    beforeEach(inject(function ($controller, $rootScope) {
+      scope = $rootScope.$new();
+      dashboardCtrl = $controller('dashboardCtrl', {
+        $scope: scope
+      });
     }));
+
+    it('should define dashboardCtrl', function() {
+      expect(dashboardCtrl).toBeDefined();
+    });
 
   });
 });

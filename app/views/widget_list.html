@@ -1,10 +1,14 @@
 <div ng-controller="widgetCtrl">
 
-    <div ng-show="widgets.length=='0'" class="row">
-        <div class="alert alert-info" role="alert">There's no widget. Add one in "Settings" tab</div>
+    <div ng-show="error" class="row">
+        <div class="alert alert-warning" role="alert"><strong>{{ error.message }}</strong></div>
     </div>
-    <div ng-show="fail.length" class="row">
-        <div class="alert alert-warning" role="alert">{{ fail.message }}</div>
+    <div ng-show="widgets.length=='0'" class="row">
+        <div ng-controller="routeCtrl" class="alert alert-info" role="alert">
+            There's no widget. Add one
+            <span ng-class="{hidden:isActive('/settings')}">in Settings tab</span>
+            <span ng-class="{hidden:isActive('/dashboard')}">above</span>
+        </div>
     </div>
 
     <article ng-show="widgets.length">

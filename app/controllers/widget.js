@@ -4,8 +4,10 @@
  * Widget management module
  */
 angular.module('weatherApp.widgetList', [])
-  .controller('widgetCtrl', ['$scope', '$http', 'widgets', 'appid', function($scope, $http, widgets, appid) {
-    $scope.fail = [];
+  .controller('widgetCtrl', ['$scope', '$rootScope', '$http', 'widgets', 'appid',
+    function($scope, $rootScope, $http, widgets, appid) {
+
+    $rootScope.error = false;
     /**
      * Add a Widget
      * @param searchType
@@ -13,10 +15,11 @@ angular.module('weatherApp.widgetList', [])
     $scope.addWeatherWidget = function(searchType) {
 
       if(!$scope.weatherSearch){
-        $scope.fail.push({
-          cod: -1,
-          message: 'No data provided'
-        });
+        $rootScope.error = {
+          triggered: true,
+          message: 'no data provided'
+        };
+        console.log($scope.error);
         return;
       }
 
@@ -27,10 +30,6 @@ angular.module('weatherApp.widgetList', [])
       } else if('city-name' === searchType){
         apiRequest = `http://api.openweathermap.org/data/2.5/weather?q=${$scope.weatherSearch}&appid=${appid}`;
       }
-
-      /**
-       * API Get Request
-       */
       $http.get(apiRequest)
         .success(function(response) {
           widgets.push({
@@ -40,10 +39,12 @@ angular.module('weatherApp.widgetList', [])
             iconId: response.weather[0].id,
             temp: response.main.temp
           });
+          $rootScope.error = false;
         })
         .error(function(error) {
-          $scope.fail = error;
-          console.log($scope.fail);
+          $rootScope.error = error;
+          $rootScope.error.triggered = true;
+          console.log($scope.error);
         });
 
       $scope.weatherSearch = '';
@@ -65,10 +66,13 @@ angular.module('weatherApp.widgetList', [])
       $http.get(`http://api.openweathermap.org/data/2.5/weather?id=${widget.cityId}&appid=${appid}`)
         .success(function(response) {
           widget.iconId = response.weather[0].id;
-          widget.temp = response.main.temp
+          widget.temp = response.main.temp;
+          $rootScope.error = false;
         })
         .error(function(error) {
-          $scope.fail = error;
+          $rootScope.error = error;
+          $rootScope.error.triggered = true;
+          console.log($scope.error);
         });
 
     };
